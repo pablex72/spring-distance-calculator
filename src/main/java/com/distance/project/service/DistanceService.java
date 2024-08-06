@@ -5,6 +5,8 @@ import com.distance.project.repository.IProvinceRepository;
 import com.distance.project.utils.DistanceCalculator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DistanceService {
 
@@ -16,13 +18,20 @@ public class DistanceService {
         this.distanceCalculator = distanceCalculator;
     }
 
-    public double calculateDistance(double lat, double lon, Long provinceId) {
-        Province targetProvince = provinceRepository.findById(provinceId)
-                .orElseThrow(() -> new IllegalArgumentException("Province not found"));
+    public double calculateShortestDistance(double lat, double lon) {
+        List<Province> provinces = provinceRepository.findAll();
+        double shortestDistance = Double.MAX_VALUE;
 
-        double targetLat = targetProvince.getLatitude();  // assuming Province has getLatitude() and getLongitude() methods
-        double targetLon = targetProvince.getLongitude();
+        for (Province province : provinces) {
+            double targetLat = province.getLatitude();
+            double targetLon = province.getLongitude();
+            double distance = distanceCalculator.calculate(lat, lon, targetLat, targetLon);
 
-        return distanceCalculator.calculate(lat, lon, targetLat, targetLon);
+            if (distance < shortestDistance) {
+                shortestDistance = distance;
+            }
+        }
+
+        return shortestDistance;
     }
 }

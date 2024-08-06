@@ -15,7 +15,7 @@ public class DistanceController {
     }
 
     @GetMapping("/calculate")
-    public double calculateDistance(@RequestParam double lat, @RequestParam double lon, @RequestParam Long provinceId) {
-        return distanceService.calculateDistance(lat, lon, provinceId);
+    public double calculateShortestDistance(@RequestParam double lat, @RequestParam double lon) {
+        return distanceService.calculateShortestDistance(lat, lon);
     }
 }
