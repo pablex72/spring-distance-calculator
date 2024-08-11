@@ -67,7 +67,7 @@ public class ProvinceDataLoader implements CommandLineRunner {
                 provinceRepository.saveAll(List.of(
                         new Province("Chuquisaca", -19.0333, -65.2667, bolivia),
                         new Province("Cochabamba", -17.3833, -66.1667, bolivia),
-                        new Province("El Beni", -14.8333, -66.0833, bolivia),
+                        new Province("Beni", -14.8333, -66.0833, bolivia),
                         new Province("La Paz", -16.5000, -68.1193, bolivia),
                         new Province("Oruro", -17.9667, -67.1167, bolivia),
                         new Province("Pando", -11.0000, -68.7500, bolivia),
